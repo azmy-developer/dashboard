@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Task;
 
-use App\Http\Resources\Checkout\UserAddressResource;
+use App\Http\Resources\Employee\EmployeeResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TaskResource extends JsonResource

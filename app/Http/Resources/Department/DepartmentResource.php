@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Department;
 
-use App\Http\Resources\Checkout\UserAddressResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class DepartmentResource extends JsonResource

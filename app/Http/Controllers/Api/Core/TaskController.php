@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Api\Core;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\DepartmentResource;
-use App\Http\Resources\User\TaskResource;
+use App\Http\Resources\Task\TaskResource;
 use App\Models\Department;
 use App\Models\Task;
 use App\Support\Api\ApiResponse;
@@ -16,8 +15,8 @@ class TaskController extends Controller
 
     protected function index()
     {
-        $task = Task::query()->get();
-        $this->body['task'] = TaskResource::collection($task);
+        $task = Task::query()->paginate(10);
+        $this->body['task'] = TaskResource::collection($task)->response()->getData();
         return self::apiResponse(200, null, $this->body);
     }
 
@@ -26,7 +25,7 @@ class TaskController extends Controller
         $request->validate([
             'title' => 'required|String|min:3',
             'employee_id' => 'required|exists:employees,id',
-            'active' => 'boolen|between:0,1',
+            'active' => 'boolean|between:0,1',
 
         ]);
         $data = $request->except('_token');
@@ -46,7 +45,7 @@ class TaskController extends Controller
             $request->validate([
                 'title' => 'required|String|min:3',
                 'employee_id' => 'required|exists:employees,id',
-                'active' => 'boolen|between:0,1',
+                'active' => 'boolean|between:0,1',
 
             ]);
             $data = $request->except('_token');
@@ -59,14 +58,14 @@ class TaskController extends Controller
 
     }
 
-    protected function delete($id)
+    protected function destroy($id)
     {
         $task = Task::find($id);
         if ($task) {
             $task->delete();
-            return self::apiResponse(200, null, $this->body);
+            return self::apiResponse(200, null, []);
         } else {
-            return self::apiResponse(200, __('api.not found or already deleted'), $this->body);
+            return self::apiResponse(200, __('api.not found or already deleted'),[]);
         }
 
     }

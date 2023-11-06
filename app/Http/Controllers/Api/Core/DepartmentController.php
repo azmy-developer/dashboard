@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\Core;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\DepartmentResource;
+use App\Http\Resources\Department\DepartmentResource;
 use App\Models\Department;
 use App\Support\Api\ApiResponse;
 use Illuminate\Http\Request;
@@ -14,8 +14,8 @@ class DepartmentController extends Controller
 
     protected function index()
     {
-        $department = Department::query()->get();
-        $this->body['department'] = DepartmentResource::collection($department);
+        $department = Department::query()->paginate(10);
+        $this->body['department'] = DepartmentResource::collection($department)->response()->getData();
         return self::apiResponse(200, null, $this->body);
     }
 
@@ -52,14 +52,19 @@ class DepartmentController extends Controller
 
     }
 
-    protected function delete($id)
+    protected function destroy($id)
     {
         $department = Department::find($id);
         if ($department) {
+
+            if ($department->employees->count() > 0 ){
+                return self::apiResponse(200, 'cannot delete this item', []);
+
+            }
             $department->delete();
-            return self::apiResponse(200, null, $this->body);
+            return self::apiResponse(200, null, []);
         } else {
-            return self::apiResponse(200, __('api.not found or already deleted'), $this->body);
+            return self::apiResponse(200, __('api.not found or already deleted'), []);
         }
 
     }
