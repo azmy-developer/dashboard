@@ -25,7 +25,7 @@
             <div class="card">
 
                 <div class="m-4 text-end">
-                    <a href="{{route('dashboard.core.employee.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
+                    <a href="{{route('dashboard.employee.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
                 </div>
 
                 <div class="card-body">
@@ -34,8 +34,10 @@
                         <thead>
                         <tr>
                             <th>#</th>
+                            <th>{{__('dash.image')}}</th>
                             <th>{{__('dash.name')}}</th>
                             <th>{{__('dash.email')}}</th>
+                            <th>salary</th>
                             <th>{{__('dash.status')}}</th>
                             <th class="no-content">{{__('dash.actions')}}</th>
                         </tr>
@@ -74,11 +76,13 @@
                 charset: 'UTF-8',
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('dashboard.core.employee.index') }}',
+                ajax: '{{ route('dashboard.employee.index') }}',
                 columns: [
                     {data: 'id', name: 'id'},
+                    {data: 'image', name: 'image'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
+                    {data: 'salary', name: 'salary'},
                     {data: 'status', name: 'status'},
                     {data: 'controll', name: 'controll', orderable: false, searchable: false},
 
@@ -91,7 +95,7 @@
             let id = $(this).attr('data-id');
 
             $.ajax({
-                url: '{{route('dashboard.core.employee.change_status')}}',
+                url: '{{route('dashboard.employee.change_status')}}',
                 type: 'get',
                 data: {id: id, active: active},
                 success: function (data) {

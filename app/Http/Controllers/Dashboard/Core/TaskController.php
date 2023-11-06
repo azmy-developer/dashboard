@@ -40,9 +40,9 @@ class TaskController extends Controller
                 ->addColumn('controll', function ($row) {
 
                     $html = '
-                    <a href="' . route('dashboard.core.task.edit', $row->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
+                    <a href="' . route('dashboard.task.edit', $row->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
 
-                                <a data-href="' . route('dashboard.core.task.destroy', $row->id) . '" data-id="' . $row->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
+                                <a data-href="' . route('dashboard.task.destroy', $row->id) . '" data-id="' . $row->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
                             <i class="far fa-trash-alt "></i>
                     </a>
                                 ';
@@ -72,7 +72,7 @@ class TaskController extends Controller
         $data=$request->except('_token');
         $model = Task::query()->Create($data);
         session()->flash('success');
-        return redirect()->route('dashboard.core.task.index');
+        return redirect()->route('dashboard.task.index');
     }
 
 
@@ -91,7 +91,7 @@ class TaskController extends Controller
         $model->update($data);
 
         session()->flash('success');
-        return redirect()->route('dashboard.core.task.index');
+        return redirect()->route('dashboard.task.index');
     }
 
 

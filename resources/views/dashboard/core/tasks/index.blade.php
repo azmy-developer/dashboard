@@ -25,7 +25,7 @@
             <div class="card">
 
                 <div class="m-4 text-end">
-                    <a href="{{route('dashboard.core.task.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
+                    <a href="{{route('dashboard.task.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
                 </div>
 
                 <div class="card-body">
@@ -74,7 +74,7 @@
                 charset: 'UTF-8',
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('dashboard.core.task.index') }}',
+                ajax: '{{ route('dashboard.task.index') }}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
@@ -91,7 +91,7 @@
             let id = $(this).attr('data-id');
 
             $.ajax({
-                url: '{{route('dashboard.core.task.change_status')}}',
+                url: '{{route('dashboard.task.change_status')}}',
                 type: 'get',
                 data: {id: id, active: active},
                 success: function (data) {

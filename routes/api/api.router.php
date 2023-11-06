@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Controllers\Api\Checkout\CheckoutController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

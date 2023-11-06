@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a
                                 href="{{route('dashboard.home')}}">{{__('dash.home')}}</a></li>
                         <li class="breadcrumb-item"><a
-                                href="{{route('dashboard.core.employee.index')}}">Employees</a>
+                                href="{{route('dashboard.employee.index')}}">Employees</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('dash.create')}}</li>
                     </ol>
@@ -30,7 +30,7 @@
 
                 <div class="card-body">
                     <form  method="post"
-                           action="{{route('dashboard.core.employee.store')}}"
+                           action="{{route('dashboard.employee.store')}}"
                            enctype="multipart/form-data">
                         @csrf
 
@@ -160,6 +160,26 @@
                                 @enderror
 
                             </div>
+
+                            <div class="col-md-6 custom-file-container form-group"
+                                 data-upload-id="mySecondImage">
+                                <label>{{__('dash.upload')}}<a href="javascript:void(0)"
+                                                               class="custom-file-container__image-clear"
+                                                               title="Clear Image">x</a></label>
+                                <div style="display: flex">
+                                    <label class="custom-file-container__custom-file">
+                                        <input type="file"
+                                               class="custom-file-container__custom-file__custom-file-input"
+                                               name="avatar"
+                                        >
+                                        {{--<input type="hidden" name="MAX_FILE_SIZE" value="10485760"/>--}}
+                                        <span
+                                            class="custom-file-container__custom-file__custom-file-control"></span>
+                                    </label>
+
+                                    <div class=" col-md-2 custom-file-container__image-preview"></div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="form-group col-md-6">
@@ -175,3 +195,8 @@
 
 @endsection
 
+@push('script')
+    <script>
+        let secondUpload = new FileUploadWithPreview('mySecondImage')
+    </script>
+@endpush

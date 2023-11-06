@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\Employee\EmployeeRequest;
 use App\Models\Department;
 use App\Models\Employee;
+use App\Support\Traits\imageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Spatie\Permission\Models\Role;
 use Yajra\DataTables\DataTables;
 
 
 class EmployeeController extends Controller
 {
+    use imageTrait;
+
     public function index()
     {
 
@@ -22,6 +26,10 @@ class EmployeeController extends Controller
                 ->addColumn('name', function ($user) {
                     $name = $user->first_name . ' ' . $user->last_name;
                     return $name;
+                })->addColumn('salary', function ($user) {
+                    return $user->salary;
+                })->addColumn('image', function ($row) {
+                    return '<img class="img-fluid" style="width: 85px;" src="'.asset($row->image).'"/>';
                 })
                 ->addColumn('status', function ($user) {
                     $checked = '';
@@ -35,9 +43,9 @@ class EmployeeController extends Controller
                 ->addColumn('controll', function ($user) {
 
                     $html = '
-                    <a href="' . route('dashboard.core.employee.edit', $user->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
+                    <a href="' . route('dashboard.employee.edit', $user->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
 
-                                <a data-href="' . route('dashboard.core.employee.destroy', $user->id) . '" data-id="' . $user->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
+                                <a data-href="' . route('dashboard.employee.destroy', $user->id) . '" data-id="' . $user->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
                             <i class="far fa-trash-alt "></i>
                     </a>
                                 ';
@@ -47,6 +55,8 @@ class EmployeeController extends Controller
                 ->rawColumns([
                     'name',
                     'status',
+                    'salary',
+                    'image',
                     'controll',
                 ])
                 ->make(true);
@@ -65,11 +75,15 @@ class EmployeeController extends Controller
 
     public function store(EmployeeRequest $request)
     {
-        $data=$request->except('_token','password_confirmation','role');
+        $data=$request->except('_token','password_confirmation','role','avatar');
+        if ($request->has('avatar')){
+            $image=$this->storeImages($request->avatar,'employee');
+            $data['image']= 'storage/images/employee'.'/'.$image;
+        }
         $model = Employee::query()->Create($data);
         $model->assignRole($request->role);
         session()->flash('success');
-        return redirect()->route('dashboard.core.employee.index');
+        return redirect()->route('dashboard.employee.index');
     }
 
 
@@ -84,15 +98,24 @@ class EmployeeController extends Controller
 
     public function update(EmployeeRequest $request, $id)
     {
-        $data=$request->except('_token','password_confirmation','role');
+        $data=$request->except('_token','password_confirmation','role','avatar');
 
         $model = Employee::query()->find($id);
+
+        if ($request->has('avatar')){
+            if (File::exists(public_path($model->image))) {
+                File::delete(public_path($model->image));
+            }
+            $image=$this->storeImages($request->avatar,'employee');
+            $data['image']= 'storage/images/employee'.'/'.$image;
+        }
+
         $model->update($data);
 
         $model->syncRoles($request->role);
 
         session()->flash('success');
-        return redirect()->route('dashboard.core.employee.index');
+        return redirect()->route('dashboard.employee.index');
     }
 
 

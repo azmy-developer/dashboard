@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string|null
      */
-     protected $namespace = 'App\\Http\\Controllers';
+     protected $namespace = '';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -36,13 +36,14 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
         $this->configureRateLimiting();
 
         $this->routes(function () {
             Route::prefix('api')
                 ->middleware('api')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/api.php'));
+                ->group(base_path('routes/api/api.router.php'));
 
             Route::middleware('web')
                 ->namespace($this->namespace)
@@ -50,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->prefix(LaravelLocalization::setLocale())
-                ->namespace("{$this->namespace}\\Dashboard")
+                ->namespace($this->namespace)
                 ->as('dashboard.')
                 ->group(base_path('routes/dashboard/dashboard.router.php'));
         });

@@ -25,7 +25,7 @@
             <div class="card">
 
                 <div class="m-4 text-end">
-                    <a href="{{route('dashboard.core.department.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
+                    <a href="{{route('dashboard.department.create')}}" class="btn btn-primary">{{__('dash.add_new')}}</a>
                 </div>
 
                 <div class="card-body">
@@ -74,7 +74,7 @@
                 charset: 'UTF-8',
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('dashboard.core.department.index') }}',
+                ajax: '{{ route('dashboard.department.index') }}',
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},

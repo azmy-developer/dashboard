@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a
                                 href="{{route('dashboard.home')}}">{{__('dash.home')}}</a></li>
                         <li class="breadcrumb-item"><a
-                                href="{{route('dashboard.core.department.index')}}">Department</a>
+                                href="{{route('dashboard.department.index')}}">Department</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('dash.edit')}}</li>
                     </ol>
@@ -30,7 +30,7 @@
 
                 <div class="card-body">
                     <form  method="post"
-                           action="{{route('dashboard.core.department.update',$department->id)}}"
+                           action="{{route('dashboard.department.update',$department->id)}}"
                            enctype="multipart/form-data">
                         {{ method_field('PATCH') }}
                         @csrf

@@ -13,7 +13,7 @@
                         <li class="breadcrumb-item"><a
                                 href="{{route('dashboard.home')}}">{{__('dash.home')}}</a></li>
                         <li class="breadcrumb-item"><a
-                                href="{{route('dashboard.core.task.index')}}">Tasks</a>
+                                href="{{route('dashboard.task.index')}}">Tasks</a>
                         </li>
                         <li class="breadcrumb-item active" aria-current="page">{{__('dash.create')}}</li>
                     </ol>
@@ -30,7 +30,7 @@
 
                 <div class="card-body">
                     <form  method="post"
-                           action="{{route('dashboard.core.task.store')}}"
+                           action="{{route('dashboard.task.store')}}"
                            enctype="multipart/form-data">
                         @csrf
 

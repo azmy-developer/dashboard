@@ -14,7 +14,7 @@
                         </a>
                         <ul class="sub-menu" aria-expanded="true">
 
-                                <li><a href="{{route('dashboard.core.employee.index')}}">Employees</a></li>
+                                <li><a href="{{route('dashboard.employee.index')}}">Employees</a></li>
 
 
                         </ul>
@@ -27,7 +27,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
 
-                        <li><a href="{{route('dashboard.core.department.index')}}">Department</a></li>
+                        <li><a href="{{route('dashboard.department.index')}}">Department</a></li>
 
 
                     </ul>
@@ -41,7 +41,7 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
 
-                        <li><a href="{{route('dashboard.core.task.index')}}">Task</a></li>
+                        <li><a href="{{route('dashboard.task.index')}}">Task</a></li>
 
 
                     </ul>

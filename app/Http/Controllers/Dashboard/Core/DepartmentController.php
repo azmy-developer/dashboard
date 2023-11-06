@@ -34,9 +34,9 @@ class DepartmentController extends Controller
                 ->addColumn('controll', function ($row) {
 
                     $html = '
-                    <a href="' . route('dashboard.core.department.edit', $row->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
+                    <a href="' . route('dashboard.department.edit', $row->id) . '" class="mr-2 btn btn-primary btn-sm"><i class="far fa-edit"></i> </a>
 
-                                <a data-href="' . route('dashboard.core.department.destroy', $row->id) . '" data-id="' . $row->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
+                                <a data-href="' . route('dashboard.department.destroy', $row->id) . '" data-id="' . $row->id . '" class="mr-2 btn btn-danger btn-delete btn-sm">
                             <i class="far fa-trash-alt "></i>
                     </a>
                                 ';
@@ -71,7 +71,7 @@ class DepartmentController extends Controller
 
         $department = Department::updateOrCreate($data);
         session()->flash('success');
-        return redirect()->route('dashboard.core.department.index');
+        return redirect()->route('dashboard.department.index');
     }
 
     public function edit($id)
@@ -92,7 +92,7 @@ class DepartmentController extends Controller
 
         $department->update($data);
         session()->flash('success');
-        return redirect()->route('dashboard.core.department.index');
+        return redirect()->route('dashboard.department.index');
     }
 
     public function destroy($id)

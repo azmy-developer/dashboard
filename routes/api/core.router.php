@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\Core\ContactUsController;
-use App\Http\Controllers\Api\Core\HomeController;
-use App\Http\Controllers\Api\Core\ServiceController;
+use App\Http\Controllers\Api\Core\DepartmentController;
+use App\Http\Controllers\Api\Core\TaskController;
+use Illuminate\Support\Facades\Route;
 
 
-Route::resource('task', \App\Http\Controllers\Api\Core\TaskController::class);
-Route::resource('department', \App\Http\Controllers\Api\Core\DepartmentController::class);
+Route::resource('task', TaskController::class);
+Route::resource('department', DepartmentController::class);

@@ -21,6 +21,7 @@ class EmployeeRequest extends FormRequest
             'password' => ['required', 'confirmed','regex:/^(?=.*[A-Za-z])(?=.*\d)/' ,Password::min(4)],
             'active' => 'nullable',
             'role' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,jpg,png,gif',
 
 
         ];
@@ -31,6 +32,7 @@ class EmployeeRequest extends FormRequest
             $rules['password'] = ['nullable', 'confirmed','regex:/^(?=.*[A-Za-z])(?=.*\d)/', Password::min(4)];
             $rules['email'] = 'required|email|max:255|unique:employees,email,' . request()->route('employee');
             $rules['phone'] = 'required|numeric|unique:employees,phone,' . request()->route('employee');
+
         }
         return $rules;
     }
