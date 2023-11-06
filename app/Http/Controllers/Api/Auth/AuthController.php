@@ -3,27 +3,17 @@
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Auth\ChangePasswordRequest;
-use App\Http\Requests\Api\Auth\ForgetPasswordRequest;
+
 use App\Http\Requests\Api\Auth\LoginRequest;
-use App\Http\Requests\Api\Auth\ProfileUpdateRequest;
-use App\Http\Requests\Api\Auth\RegisterRequest;
 use App\Http\Resources\User\EmployeeResource;
-use App\Http\Resources\User\UserResource;
 use App\Models\Employee;
-use App\Models\Order;
-use App\Models\Setting;
-use App\Models\User;
-use App\Sms\HiSms;
 use App\Support\Api\ApiResponse;
-use App\Traits\SMSTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
-use MoemenGaballah\Msegat\Msegat;
 
 class AuthController extends Controller
 {
