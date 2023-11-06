@@ -22,6 +22,8 @@ class EmployeeRequest extends FormRequest
             'active' => 'nullable',
             'role' => 'required',
             'avatar' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+            'department_id' => 'required|exists:departments,id',
+            'salary' => 'required|numeric',
 
 
         ];

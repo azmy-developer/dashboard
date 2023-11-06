@@ -58,6 +58,8 @@ class AuthController extends Controller
             'active' => 'nullable',
             'role' => 'required',
             'image' => 'nullable|image|mimes:jpeg,jpg,png,gif',
+            'department_id' => 'required|exists:departments,id',
+
         ], $request->all());
 
         $data=$request->except('_token','role','image','password');
